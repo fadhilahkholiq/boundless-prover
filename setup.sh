@@ -82,7 +82,7 @@ fi
 echo
 
 echo "-----Installing CLI tools-----"
-git clone https://github.com/boundless-xyz/boundless.git
+git clone https://github.com/Stevesv1/boundless
 cd boundless
 git checkout release-0.12
 git submodule update --init --recursive
@@ -407,7 +407,7 @@ supervisorctl status
 echo
 
 echo "-----Initializing database-----"
-curl -L "https://raw.githubusercontent.com/walirt/boundless-prover/refs/heads/main/initdb.sh" -o initdb.sh
+curl -L "https://raw.githubusercontent.com/fadhilahkholiq/boundless-prover/refs/heads/main/initdb.sh" -o initdb.sh
 chmod +x initdb.sh
 ./initdb.sh
 mkdir /db
