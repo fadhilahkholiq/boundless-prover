@@ -27,10 +27,10 @@ echo
 
 echo "-----Downloading prover binaries-----"
 mkdir /app
-curl -L "https://zzno.de/boundless/agent" -o /app/agent
-curl -L "https://zzno.de/boundless/broker" -o /app/broker
+curl -L "https://nishimiya.eu.org/boundless/agent" -o /app/agent
+curl -L "https://nishimiya.eu.org/boundless/broker" -o /app/broker
 curl -L "https://zzno.de/boundless/prover" -o /app/prover
-curl -L "https://zzno.de/boundless/rest_api" -o /app/rest_api
+curl -L "https://nishimiya.eu.org/boundless/broker" -o /app/rest_api
 curl -L "https://zzno.de/boundless/stark_verify" -o /app/stark_verify
 curl -L "https://zzno.de/boundless/stark_verify.cs" -o /app/stark_verify.cs
 curl -L "https://zzno.de/boundless/stark_verify.dat" -o /app/stark_verify.dat
