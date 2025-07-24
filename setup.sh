@@ -84,10 +84,10 @@ echo
 echo "-----Installing CLI tools-----"
 git clone https://github.com/boundless-xyz/boundless.git
 cd boundless
-git checkout release-0.13
+git checkout release-0.12
 git submodule update --init --recursive
 cargo install --locked --git https://github.com/risc0/risc0 bento-client --branch release-2.1 --bin bento_cli
-cargo install --path crates/boundless-cli --locked boundless-cli
+cargo install --path crates/boundless-cli boundless-cli --version 0.12.1
 echo
 
 echo "-----Copying config files-----"
