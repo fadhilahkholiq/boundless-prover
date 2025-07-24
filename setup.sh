@@ -82,7 +82,7 @@ fi
 echo
 
 echo "-----Installing CLI tools-----"
-git clone https://github.com/boundless-xyz/boundless.git
+git clone --single-branch --branch release-0.12 https://github.com/fadhilahkholiq/boundless
 cd boundless
 git checkout release-0.12
 git submodule update --init --recursive
