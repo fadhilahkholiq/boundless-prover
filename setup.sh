@@ -43,7 +43,7 @@ chmod +x /app/rest_api
 chmod +x /app/stark_verify
 
 echo "-----Installing CLI tools-----"
-git clone https://github.com/miles-six/boundless-miles.git
+git clone https://github.com/boundless-xyz/boundless.git
 cd boundless
 git submodule update --init --recursive
 cargo install --locked --git https://github.com/risc0/risc0 bento-client --bin bento_cli
