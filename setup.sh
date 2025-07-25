@@ -324,7 +324,7 @@ stdout_logfile=/var/log/exec_agent7.log
 redirect_stderr=true
 environment=DATABASE_URL="postgresql://worker:password@localhost:5432/taskdb",REDIS_URL="redis://localhost:6379",S3_URL="http://localhost:9000",S3_BUCKET="workflow",S3_ACCESS_KEY="admin",S3_SECRET_KEY="password",RUST_LOG="info",RUST_BACKTRACE="1",RISC0_KECCAK_PO2="17"
 
-[program:exec_agent1]
+[program:exec_agent8]
 command=/app/agent -t exec --segment-po2 $MIN_SEGMENT_SIZE
 directory=/app
 autostart=true
@@ -332,7 +332,7 @@ autorestart=true
 startsecs=5
 stopwaitsecs=10
 priority=50
-stdout_logfile=/var/log/exec_agent1.log
+stdout_logfile=/var/log/exec_agent8.log
 redirect_stderr=true
 environment=DATABASE_URL="postgresql://worker:password@localhost:5432/taskdb",REDIS_URL="redis://localhost:6379",S3_URL="http://localhost:9000",S3_BUCKET="workflow",S3_ACCESS_KEY="admin",S3_SECRET_KEY="password",RUST_LOG="info",RUST_BACKTRACE="1",RISC0_KECCAK_PO2="17"
 
