@@ -111,7 +111,7 @@ fi
 echo
 
 echo "-----Installing CLI tools-----"
-git clone https://github.com/boundless-xyz/boundless.git
+git clone https://github.com/fadhilahkholiq/boundless.git
 cd boundless
 git checkout release-0.13
 git submodule update --init --recursive
