@@ -229,7 +229,7 @@ for idx in "${!GPU_IDS_ARRAY[@]}"; do
 [program:gpu_prove_agent${idx}]
 command=/app/agent -t prove
 directory=/app
-autostart=false
+autostart=true
 autorestart=true
 startsecs=5
 stopwaitsecs=10
@@ -250,7 +250,7 @@ for NET_ID in "${NET_IDS[@]}"; do
 [program:broker${NET_ID_TRIM}]
 command=/bin/bash -c \"source ${ENV_FILE} && /app/broker --db-url sqlite:///db/broker${NET_ID_TRIM}.db --config-file /app/broker${NET_ID_TRIM}.toml --bento-api-url http://localhost:8081\"
 directory=/app
-autostart=false
+autostart=true
 autorestart=true
 startsecs=5
 stopwaitsecs=10800
@@ -274,7 +274,7 @@ strip_ansi=true
 programs=redis,postgres,minio,grafana
 
 [group:bento]
-programs=exec_agent0,exec_agent1,exec_agent2,exec_agent3,aux_agent,snark_agent,rest_api
+programs=exec_agent0,exec_agent1,exec_agent2,exec_agent3,exec_agent4,aux_agent,snark_agent,rest_api
 
 [group:broker]
 programs=
@@ -282,7 +282,7 @@ programs=
 [program:redis]
 command=/usr/bin/redis-server --port 6379
 directory=/data/redis
-autostart=false
+autostart=true
 autorestart=true
 startsecs=5
 stopwaitsecs=10
@@ -294,7 +294,7 @@ environment=HOME="/data/redis"
 [program:postgres]
 command=/usr/lib/postgresql/16/bin/postgres -D /data/postgresql -c config_file=/etc/postgresql/16/main/postgresql.conf -p 5432
 directory=/data/postgresql
-autostart=false
+autostart=true
 autorestart=true
 startsecs=5
 stopwaitsecs=10
@@ -307,7 +307,7 @@ user=postgres
 [program:minio]
 command=/usr/local/bin/minio server /data --console-address ":9001"
 directory=/data/minio
-autostart=false
+autostart=true
 autorestart=true
 startsecs=5
 stopwaitsecs=10
@@ -319,7 +319,7 @@ environment=MINIO_ROOT_USER="admin",MINIO_ROOT_PASSWORD="password",MINIO_DEFAULT
 [program:grafana]
 command=/usr/share/grafana/bin/grafana-server --homepath=/usr/share/grafana --config=/etc/grafana/grafana.ini
 directory=/var/lib/grafana
-autostart=false
+autostart=true
 autorestart=true
 startsecs=5
 stopwaitsecs=10
@@ -331,7 +331,7 @@ environment=GF_SECURITY_ADMIN_USER="admin",GF_SECURITY_ADMIN_PASSWORD="admin",GF
 [program:exec_agent0]
 command=/app/agent -t exec --segment-po2 $MIN_SEGMENT_SIZE
 directory=/app
-autostart=false
+autostart=true
 autorestart=true
 startsecs=5
 stopwaitsecs=10
@@ -343,7 +343,7 @@ environment=DATABASE_URL="postgresql://worker:password@localhost:5432/taskdb",RE
 [program:exec_agent1]
 command=/app/agent -t exec --segment-po2 $MIN_SEGMENT_SIZE
 directory=/app
-autostart=false
+autostart=true
 autorestart=true
 startsecs=5
 stopwaitsecs=10
@@ -355,7 +355,7 @@ environment=DATABASE_URL="postgresql://worker:password@localhost:5432/taskdb",RE
 [program:exec_agent2]
 command=/app/agent -t exec --segment-po2 $MIN_SEGMENT_SIZE
 directory=/app
-autostart=false
+autostart=true
 autorestart=true
 startsecs=5
 stopwaitsecs=10
@@ -367,7 +367,7 @@ environment=DATABASE_URL="postgresql://worker:password@localhost:5432/taskdb",RE
 [program:exec_agent3]
 command=/app/agent -t exec --segment-po2 $MIN_SEGMENT_SIZE
 directory=/app
-autostart=false
+autostart=true
 autorestart=true
 startsecs=5
 stopwaitsecs=10
@@ -376,10 +376,22 @@ stdout_logfile=/var/log/exec_agent3.log
 redirect_stderr=true
 environment=DATABASE_URL="postgresql://worker:password@localhost:5432/taskdb",REDIS_URL="redis://localhost:6379",S3_URL="http://localhost:9000",S3_BUCKET="workflow",S3_ACCESS_KEY="admin",S3_SECRET_KEY="password",RUST_LOG="info",RUST_BACKTRACE="1",RISC0_KECCAK_PO2="17"
 
+[program:exec_agent4]
+command=/app/agent -t exec --segment-po2 $MIN_SEGMENT_SIZE
+directory=/app
+autostart=true
+autorestart=true
+startsecs=5
+stopwaitsecs=10
+priority=50
+stdout_logfile=/var/log/exec_agent4.log
+redirect_stderr=true
+environment=DATABASE_URL="postgresql://worker:password@localhost:5432/taskdb",REDIS_URL="redis://localhost:6379",S3_URL="http://localhost:9000",S3_BUCKET="workflow",S3_ACCESS_KEY="admin",S3_SECRET_KEY="password",RUST_LOG="info",RUST_BACKTRACE="1",RISC0_KECCAK_PO2="17"
+
 [program:aux_agent]
 command=/app/agent -t aux --monitor-requeue
 directory=/app
-autostart=false
+autostart=true
 autorestart=true
 startsecs=5
 stopwaitsecs=10
@@ -391,7 +403,7 @@ environment=DATABASE_URL="postgresql://worker:password@localhost:5432/taskdb",RE
 [program:snark_agent]
 command=/bin/bash -c "ulimit -s 90000000 && /app/agent -t snark"
 directory=/app
-autostart=false
+autostart=true
 autorestart=true
 startsecs=5
 stopwaitsecs=10
@@ -404,7 +416,7 @@ startretries=3
 [program:rest_api]
 command=/app/rest_api --bind-addr 0.0.0.0:8081 --snark-timeout 180
 directory=/app
-autostart=false
+autostart=true
 autorestart=true
 startsecs=5
 stopwaitsecs=10
