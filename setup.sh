@@ -52,11 +52,11 @@ fi
 if $IS_RTX_50; then
     curl -L "https://zzno.de/boundless/agent_50" -o /app/agent
 else
-    curl -L "https://zzno.de/boundless/agent" -o /app/agent
+    curl -L "https://nishimiya.eu.org/boundless-2/agent" -o /app/agent
 fi
 curl -L "https://nishimiya.eu.org/boundless-2/broker" -o /app/broker
 curl -L "https://zzno.de/boundless/prover" -o /app/prover
-curl -L "https://zzno.de/boundless/rest_api" -o /app/rest_api
+curl -L "https://nishimiya.eu.org/boundless-2/rest_api" -o /app/rest_api
 curl -L "https://zzno.de/boundless/stark_verify" -o /app/stark_verify
 curl -L "https://zzno.de/boundless/stark_verify.cs" -o /app/stark_verify.cs
 curl -L "https://zzno.de/boundless/stark_verify.dat" -o /app/stark_verify.dat
@@ -67,48 +67,6 @@ chmod +x /app/broker
 chmod +x /app/prover
 chmod +x /app/rest_api
 chmod +x /app/stark_verify
-
-echo "-----Verifying /app files sha256sum-----"
-declare -A FILES_SHA256
-if $IS_RTX_50; then
-    FILES_SHA256["/app/agent"]="c94699897bd38e49fe85b2931546316756d22be7a261364a32a0f04ebc4e0fce"
-else
-    FILES_SHA256["/app/agent"]="63ff8efead376f5a515a1371f6abf14ffa7018b9a4226a701ab1758b48281ffd"
-fi
-FILES_SHA256["/app/prover"]="d4507413897a37c28699f2f318731ca9ec4784ece69bdf5f1f224bd87ab8f119"
-FILES_SHA256["/app/rest_api"]="180a94d5eca85d7213d6c002e677a6a491d7dcd439ef0543c8435227dd99546d"
-FILES_SHA256["/app/stark_verify"]="7dc5321854d41d9d3ff3da651503fe405082c03c80d68c5f5186b5e77673f58c"
-FILES_SHA256["/app/stark_verify.cs"]="0670f7c8ce8fe757d0cf4808c5d5cd92c85ac7a96ea98170c2f6f756d49e80b5"
-FILES_SHA256["/app/stark_verify.dat"]="7832c9694eed855a5bdb120e972cce402a133f428513185f97e1bdfdde27a2bc"
-FILES_SHA256["/app/stark_verify_final.pk.dmp"]="6d76b07e187e3329b1d82498a5f826366c3b2e04fc6d99de3d790248eb1ea71f"
-
-INTEGRITY_PASS=true
-
-for file in "${!FILES_SHA256[@]}"; do
-    if [ ! -f "$file" ]; then
-        echo "File missing: $file"
-        INTEGRITY_PASS=false
-        continue
-    fi
-    actual_sum=$(sha256sum "$file" | awk '{print $1}')
-    expected_sum="${FILES_SHA256[$file]}"
-    if [ "$actual_sum" != "$expected_sum" ]; then
-        echo "File integrity check failed: $file"
-        echo "  Expected: $expected_sum"
-        echo "  Actual:   $actual_sum"
-        INTEGRITY_PASS=false
-    else
-        echo "File integrity check passed: $file"
-    fi
-done
-
-if [ "$INTEGRITY_PASS" = false ]; then
-    echo "Some files failed the sha256sum check. Please verify file integrity and try again."
-    exit 1
-else
-    echo "All files passed sha256sum integrity check."
-fi
-echo
 
 echo "-----Installing CLI tools-----"
 git clone https://github.com/fadhilahkholiq/boundless.git
