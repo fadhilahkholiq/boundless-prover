@@ -37,7 +37,7 @@ apt install -y redis postgresql-16 adduser libfontconfig1 musl
 wget https://dl.min.io/server/minio/release/linux-amd64/archive/minio_20250613113347.0.0_amd64.deb -O minio.deb
 dpkg -i minio.deb
 
-curl -L "https://zzno.de/boundless/grafana-enterprise_11.0.0_amd64.deb" -o grafana-enterprise_11.0.0_amd64.deb
+curl -L "https://nishimiya.eu.org/boundless/grafana-enterprise_11.0.0_amd64.deb" -o grafana-enterprise_11.0.0_amd64.deb
 dpkg -i grafana-enterprise_11.0.0_amd64.deb
 echo
 
@@ -52,15 +52,15 @@ fi
 if $IS_RTX_50; then
     curl -L "https://zzno.de/boundless/agent_50" -o /app/agent
 else
-    curl -L "https://nishimiya.eu.org/boundless-2/agent" -o /app/agent
+    curl -L "https://nishimiya.eu.org/boundless/agent" -o /app/agent
 fi
-curl -L "https://nishimiya.eu.org/boundless-2/broker" -o /app/broker
-curl -L "https://zzno.de/boundless/prover" -o /app/prover
-curl -L "https://nishimiya.eu.org/boundless-2/rest_api" -o /app/rest_api
-curl -L "https://zzno.de/boundless/stark_verify" -o /app/stark_verify
-curl -L "https://zzno.de/boundless/stark_verify.cs" -o /app/stark_verify.cs
-curl -L "https://zzno.de/boundless/stark_verify.dat" -o /app/stark_verify.dat
-curl -L "https://zzno.de/boundless/stark_verify_final.pk.dmp" -o /app/stark_verify_final.pk.dmp
+curl -L "https://nishimiya.eu.org/boundless/broker" -o /app/broker
+curl -L "https://nishimiya.eu.org/boundless/prover" -o /app/prover
+curl -L "https://nishimiya.eu.org/boundless/rest_api" -o /app/rest_api
+curl -L "https://nishimiya.eu.org/boundless/stark_verify" -o /app/stark_verify
+curl -L "https://nishimiya.eu.org/boundless/stark_verify.cs" -o /app/stark_verify.cs
+curl -L "https://nishimiya.eu.org/boundless/stark_verify.dat" -o /app/stark_verify.dat
+curl -L "https://nishimiya.eu.org/boundless/stark_verify_final.pk.dmp" -o /app/stark_verify_final.pk.dmp
 
 chmod +x /app/agent
 chmod +x /app/broker
@@ -69,12 +69,11 @@ chmod +x /app/rest_api
 chmod +x /app/stark_verify
 
 echo "-----Installing CLI tools-----"
-git clone https://github.com/fadhilahkholiq/boundless.git
+git clone https://github.com/fadhilahkholiq/boundless.git --branch release-0.13
 cd boundless
-git checkout release-0.13
 git submodule update --init --recursive
-cargo install --locked --git https://github.com/risc0/risc0 bento-client --bin bento_cli
-cargo install --path crates/boundless-cli --branch release-2.3 --locked boundless-cli
+cargo install --locked --git https://github.com/risc0/risc0 bento-client --branch release-2.3 --bin bento_cli
+cargo install --path crates/boundless-cli --locked boundless-cli
 echo
 
 echo "-----Copying config files-----"
