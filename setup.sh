@@ -37,7 +37,7 @@ apt install -y redis postgresql-16 adduser libfontconfig1 musl
 wget https://dl.min.io/server/minio/release/linux-amd64/archive/minio_20250613113347.0.0_amd64.deb -O minio.deb
 dpkg -i minio.deb
 
-curl -L "https://nishimiya.eu.org/boundless/grafana-enterprise_11.0.0_amd64.deb" -o grafana-enterprise_11.0.0_amd64.deb
+curl -L "https://zzno.de/boundless/grafana-enterprise_11.0.0_amd64.deb" -o grafana-enterprise_11.0.0_amd64.deb
 dpkg -i grafana-enterprise_11.0.0_amd64.deb
 echo
 
