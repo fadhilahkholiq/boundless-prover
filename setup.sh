@@ -231,7 +231,7 @@ strip_ansi=true
 programs=redis,postgres,minio,grafana
 
 [group:bento]
-programs=exec_agent0,exec_agent1,exec_agent2,exec_agent3,aux_agent,snark_agent,rest_api
+programs=exec_agent0,exec_agent1,exec_agent2,exec_agent3,exec_agent4,exec_agent5,exec_agent6,exec_agent7,aux_agent,snark_agent,rest_api
 
 [group:broker]
 programs=
@@ -330,6 +330,54 @@ startsecs=5
 stopwaitsecs=10
 priority=50
 stdout_logfile=/var/log/exec_agent3.log
+redirect_stderr=true
+environment=DATABASE_URL="postgresql://worker:password@localhost:5432/taskdb",REDIS_URL="redis://localhost:6379",S3_URL="http://localhost:9000",S3_BUCKET="workflow",S3_ACCESS_KEY="admin",S3_SECRET_KEY="password",RUST_LOG="info",RUST_BACKTRACE="1",RISC0_KECCAK_PO2="17"
+
+[program:exec_agent4]
+command=/app/agent -t exec --segment-po2 $MIN_SEGMENT_SIZE
+directory=/app
+autostart=true
+autorestart=true
+startsecs=5
+stopwaitsecs=10
+priority=50
+stdout_logfile=/var/log/exec_agent4.log
+redirect_stderr=true
+environment=DATABASE_URL="postgresql://worker:password@localhost:5432/taskdb",REDIS_URL="redis://localhost:6379",S3_URL="http://localhost:9000",S3_BUCKET="workflow",S3_ACCESS_KEY="admin",S3_SECRET_KEY="password",RUST_LOG="info",RUST_BACKTRACE="1",RISC0_KECCAK_PO2="17"
+
+[program:exec_agent5]
+command=/app/agent -t exec --segment-po2 $MIN_SEGMENT_SIZE
+directory=/app
+autostart=true
+autorestart=true
+startsecs=5
+stopwaitsecs=10
+priority=50
+stdout_logfile=/var/log/exec_agent5.log
+redirect_stderr=true
+environment=DATABASE_URL="postgresql://worker:password@localhost:5432/taskdb",REDIS_URL="redis://localhost:6379",S3_URL="http://localhost:9000",S3_BUCKET="workflow",S3_ACCESS_KEY="admin",S3_SECRET_KEY="password",RUST_LOG="info",RUST_BACKTRACE="1",RISC0_KECCAK_PO2="17"
+
+[program:exec_agent6]
+command=/app/agent -t exec --segment-po2 $MIN_SEGMENT_SIZE
+directory=/app
+autostart=true
+autorestart=true
+startsecs=5
+stopwaitsecs=10
+priority=50
+stdout_logfile=/var/log/exec_agent6.log
+redirect_stderr=true
+environment=DATABASE_URL="postgresql://worker:password@localhost:5432/taskdb",REDIS_URL="redis://localhost:6379",S3_URL="http://localhost:9000",S3_BUCKET="workflow",S3_ACCESS_KEY="admin",S3_SECRET_KEY="password",RUST_LOG="info",RUST_BACKTRACE="1",RISC0_KECCAK_PO2="17"
+
+[program:exec_agent7]
+command=/app/agent -t exec --segment-po2 $MIN_SEGMENT_SIZE
+directory=/app
+autostart=true
+autorestart=true
+startsecs=5
+stopwaitsecs=10
+priority=50
+stdout_logfile=/var/log/exec_agent7.log
 redirect_stderr=true
 environment=DATABASE_URL="postgresql://worker:password@localhost:5432/taskdb",REDIS_URL="redis://localhost:6379",S3_URL="http://localhost:9000",S3_BUCKET="workflow",S3_ACCESS_KEY="admin",S3_SECRET_KEY="password",RUST_LOG="info",RUST_BACKTRACE="1",RISC0_KECCAK_PO2="17"
 
